@@ -3,9 +3,8 @@ HiyaCFW Launcher language patcher for Windows
 
 ## Features:
 * Fixed file name check
-* Fixed file hash check
 * Auto backup creation
-* JAPtoEUR lang patch
+* CHN/JAP/KORtoEUR patch
 
 ## Known bugs:
 * Camera app not working
