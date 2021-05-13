@@ -1,4 +1,4 @@
-# cli_hiyalang
+# hiyalang
 HiyaCFW Launcher language patcher for Windows
 
 ## Features:

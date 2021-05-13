@@ -51,6 +51,11 @@ begin
     '\title\00030017\484e414b\content\00000000.app'; // KOR
     '\title\00030017\484e4150\content\00000002.app'; // EUR
     '\title\00030017\484e4155\content\00000002.app'; // AUS
+
+    PatchFile(AppFilePath, Swap64($01xx7F2018607047), $48ba4);
+    //ASIA: 014800687047C046, WORLD: 01483E207047C046
+    PatchFile(AppFilePath, Swap64($014Bxx2018727047), $48bc8);
+    //JPN = 00, USA = 01, EUR = 02, AUS = 03, CHN = ?, KOR = ?
   }
 
   WriteLn('Looking for Launcher...');
