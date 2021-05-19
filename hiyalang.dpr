@@ -1,5 +1,5 @@
 {
-  v0.2 @ 13.05.2021
+  v0.3 @ 20.05.2021
   This patcher utility is written by Yoti
   Mostly based on Mighty Max's work - thx
 }
@@ -14,10 +14,16 @@ uses
   WinApi.Windows;
 
 const
-  ProgramTitle: String = 'HiyaCFW language patcher v0.2';
+  ProgramTitle: String = 'HiyaCFW language patcher v0.3';
+  AppFileArray: Array[0..2] of Array[0..2] of String = (
+    ('3', '0', 'Chinese'),
+    ('a', '2', 'Japanese'),
+    ('b', '0', 'Korean')
+  );
 
 var
   ConsoleTitle: Array [0..MAX_PATH] of Char;
+  i: Integer;
   AppFilePath: String;
   BakFilePath: String;
 
@@ -60,58 +66,28 @@ begin
 
   WriteLn('Looking for Launcher...');
 
-  AppFilePath:=ExtractFileDrive(ParamStr(0)) +
-    '\title\00030017\484e4143\content\00000000.app'; // CHN
-  BakFilePath:=ChangeFileExt(AppFilePath, '.bak');
+  for i:=0 to Length(AppFileArray)-1 do begin
+    AppFilePath:=ExtractFileDrive(ParamStr(0)) +
+      '\title\00030017\484e414' +
+      AppFileArray[i][0] +
+      '\content\0000000' +
+      AppFileArray[i][1] +
+      '.app';
+    BakFilePath:=ChangeFileExt(AppFilePath, '.bak');
 
-  if (FileExists(AppFilePath) = True) then begin
-    WriteLn('Chinese Launcher found!');
+    if (FileExists(AppFilePath) = True) then begin
+      WriteLn(AppFileArray[i][2] + ' Launcher found!');
 
-    if (FileExists(BakFilePath) = False) then begin
-      CopyFile(PChar(AppFilePath), PChar(BakFilePath), True);
-      WriteLn('Backup Launcher created');
-    end else WriteLn('Backup Launcher exists');
+      if (FileExists(BakFilePath) = False) then begin
+        CopyFile(PChar(AppFilePath), PChar(BakFilePath), True);
+        WriteLn('Backup Launcher created');
+      end else WriteLn('Backup Launcher exists');
 
-    PatchFile(AppFilePath, Swap64($014B7F2018607047), $48ba4);
-    PatchFile(AppFilePath, Swap64($014B022018727047), $48bc8);
+      PatchFile(AppFilePath, Swap64($014B7F2018607047), $48ba4);
+      PatchFile(AppFilePath, Swap64($014B022018727047), $48bc8);
 
-    WriteLn('Two patches applied!');
-  end;
-
-  AppFilePath:=ExtractFileDrive(ParamStr(0)) +
-    '\title\00030017\484e414a\content\00000002.app'; // JAP
-  BakFilePath:=ChangeFileExt(AppFilePath, '.bak');
-
-  if (FileExists(AppFilePath) = True) then begin
-    WriteLn('Japanese Launcher found!');
-
-    if (FileExists(BakFilePath) = False) then begin
-      CopyFile(PChar(AppFilePath), PChar(BakFilePath), True);
-      WriteLn('Backup Launcher created');
-    end else WriteLn('Backup Launcher exists');
-
-    PatchFile(AppFilePath, Swap64($014B7F2018607047), $48ba4);
-    PatchFile(AppFilePath, Swap64($014B022018727047), $48bc8);
-
-    WriteLn('Two patches applied!');
-  end;
-
-  AppFilePath:=ExtractFileDrive(ParamStr(0)) +
-    '\title\00030017\484e414b\content\00000000.app'; // KOR
-  BakFilePath:=ChangeFileExt(AppFilePath, '.bak');
-
-  if (FileExists(AppFilePath) = True) then begin
-    WriteLn('Korean Launcher found!');
-
-    if (FileExists(BakFilePath) = False) then begin
-      CopyFile(PChar(AppFilePath), PChar(BakFilePath), True);
-      WriteLn('Backup Launcher created');
-    end else WriteLn('Backup Launcher exists');
-
-    PatchFile(AppFilePath, Swap64($014B7F2018607047), $48ba4);
-    PatchFile(AppFilePath, Swap64($014B022018727047), $48bc8);
-
-    WriteLn('Two patches applied!');
+      WriteLn('Two patches applied!');
+    end else WriteLn(AppFileArray[i][2] + ' Launcher NOT found!');
   end;
 
   WriteLn('Done, press ENTER to exit...'); ReadLn;
