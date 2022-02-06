@@ -1,6 +1,7 @@
 {
-  v0.4 @ 11.07.2021
+  v0.5 @ 06.02.2022
   This patcher utility is written by Yoti
+  American region support added by Simonsator
   Mostly based on Mighty Max's work - thx
 }
 {
