@@ -40,8 +40,8 @@ const
     '00000000.app', '00000002.app'
   );
   AppFileArray: Array[0..3] of Array[0..2] of String = (
-    ('5', '2', 'USA'),
     ('3', '0', 'Chinese'),
+    ('5', '2', 'USA'),
     ('a', '2', 'Japanese'),
     ('b', '0', 'Korean')
   );
