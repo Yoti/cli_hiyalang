@@ -1,5 +1,4 @@
 # hiyalang
-# hiyalang
 HiyaCFW Launcher language patcher for Windows
 ## Installation
 1. Put the file hiyalang.exe into the root of your sd card
