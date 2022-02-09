@@ -1,6 +1,7 @@
 {
-  v0.4 @ 11.07.2021
+  v0.5 @ 06.02.2022
   This patcher utility is written by Yoti
+  American region support added by Simonsator
   Mostly based on Mighty Max's work - thx
 }
 {
@@ -38,8 +39,9 @@ const
   LocalFileArr: Array[0..1] of String = (
     '00000000.app', '00000002.app'
   );
-  AppFileArray: Array[0..2] of Array[0..2] of String = (
+  AppFileArray: Array[0..3] of Array[0..2] of String = (
     ('3', '0', 'Chinese'),
+    ('5', '2', 'USA'),
     ('a', '2', 'Japanese'),
     ('b', '0', 'Korean')
   );
